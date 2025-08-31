@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Description </title>
+</head>
+
+<body>
+    <div class="desc">
+        <h1 class="hd"> Description </h1>
+        <textarea placeholder="Start typing . . ." id="textarea"></textarea>
+        <p class="max_count">200 characters max</p>
+        <p id="count" class="wc">wordcount: </p>
+    </div>
+    <style>
+        .desc {
+            border: 1px solid black;
+            border-radius: 2px;
+            width: 450px;
+            padding: 10px;
+            margin: 10px;
+            background-color: lightcyan;
+        }
+
+        #textarea {
+            width: 100%;
+            height: 120px;
+            font-size: 14px;
+        }
+
+        .max_count,
+        .wc {
+            text-align: right;
+        }
+    </style>
+
+    <script>
+        var textarea = document.getElementById("textarea")
+        var count = document.getElementById("count")
+
+        //• If the user exceeds the character limit, prevent further typing 
+        // and display a warning message
+
+        function updateCount() {
+            var text = textarea.value.length
+
+            if (text >= 200) {
+
+                count.textContent = "200/200 - you have exceed the character limit";
+            } else {
+                count.textContent = text + "/200 (" + (200 - text) + " remaining)";
+            }
+        }
+
+        textarea.addEventListener("keydown", function (e) {
+            var text = textarea.value.length
+            if (text >= 200 && e.key.length === 1) {
+                e.preventDefault();
+            }
+        });
+
+        textarea.addEventListener("input", updateCount);
+        updateCount();
+    </script>
+</body>
+
+</html>
